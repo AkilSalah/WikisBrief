@@ -1,11 +1,12 @@
 <?php 
+require_once '../config/db.php';
 class User{
     private $id_user;
     private $email_user;
     private $password_user;
     private $nom_user;
     private $prenom_user ;
-    private $role_user;
+    private $role_user = 'auteur';
 
 public function __construct(){
 
@@ -37,7 +38,6 @@ public function setIdUser($id_user) {
     $this->id_user = $id_user;
 }
 
-// Getters and Setters for email_user
 public function getEmailUser() {
     return $this->email_user;
 }
