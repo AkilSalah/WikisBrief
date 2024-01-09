@@ -1,3 +1,7 @@
+<?php
+require_once '../controllers/adminController.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
