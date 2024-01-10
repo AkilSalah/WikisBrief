@@ -60,28 +60,60 @@
 
             </div>
         </aside>
-        
+
         <div class="main">
             <nav class="navbar navbar-expand border-bottom d-flex justify-content-between">
                 <button class="btn" type="button" data-bs-theme="dark" style="font-size: larger;">
                     <span class="fa-solid fa-bars" style="width: 20%;"></span>
                 </button>
-                <div class="d-flex" >
-                <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle " width="40px" height="40px" >
-                <p class="text-black my-auto" >Admin name</p>
-                
+                <div class="d-flex">
+                    <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle " width="40px" height="40px">
+                    <p class="text-black my-auto">Admin name</p>
+
 
                 </div>
             </nav>
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     <div class="mb-3">
-                        <div class="row">
-                            <div class="col-12  mb-1">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="col-6">
                                 <h4 class="text-uppercase fw-bold m-1">Categories</h4>
                             </div>
+                            <div class="">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudModal">
+                                    Ajouter Categorie
+                                </button>
+                            </div>
                         </div>
-                        
+
+                        <div class="modal fade" id="crudModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-md">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                                <h3 class="modal-title text-black fw-bold ">Ajouter Catégorie</h3>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="name" class="form-label">Nom Categorie</label>
+                                                        <input type="text" class="form-control" id="name" placeholder="Nom Categorie" required>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">Ajouter Catégorie</button>
+                                                </div>
+                                            </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
                         <table class="table mt-2">
                             <thead>
                                 <tr>
@@ -98,11 +130,11 @@
                                     <td>Mark</td>
                                     <td> <i class="fa-solid fa-trash mx-2"></i></td>
                                     <td><i class="fa-solid fa-pen mx-2"></i></td>
-                                    
-                                    
+
+
                                 </tr>
-                              
-                               
+
+
                             </tbody>
                         </table>
 

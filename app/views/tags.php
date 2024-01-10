@@ -76,9 +76,39 @@
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     <div class="mb-3">
-                        <div class="row">
-                            <div class="col-12  mb-1">
+                    <div class="d-flex justify-content-between align-items-center">
+                            <div class="col-6">
                                 <h4 class="text-uppercase fw-bold m-1">Tags</h4>
+                            </div>
+                            <div >
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudModal">
+                                    Ajouter Tag
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="crudModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-md">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                                <h3 class="modal-title text-black fw-bold ">Ajouter Tag</h3>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="name" class="form-label">Nom Tag</label>
+                                                        <input type="text" class="form-control" id="name" placeholder="Nom Categorie" required>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">Ajouter Tag</button>
+                                                </div>
+                                            </form>
+
+
+                                </div>
                             </div>
                         </div>
                         

@@ -60,23 +60,67 @@
 
             </div>
         </aside>
-        
+
         <div class="main">
-        <nav class="navbar navbar-expand border-bottom d-flex justify-content-between">
+            <nav class="navbar navbar-expand border-bottom d-flex justify-content-between">
                 <button class="btn" type="button" data-bs-theme="dark" style="font-size: larger;">
                     <span class="fa-solid fa-bars" style="width: 20%;"></span>
                 </button>
-                <div class="d-flex" >
-                <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle " width="40px" height="40px" >
-                <p class="text-black my-auto" >Admin name</p>
-                
+                <div class="d-flex">
+                    <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle " width="40px" height="40px">
+                    <p class="text-black my-auto">Admin name</p>
+
 
                 </div>
             </nav>
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     <div class="mb-3">
-                       
+                        <div class="col-6">
+                            <h4 class="text-uppercase fw-bold m-1">Wikis</h4>
+                        </div>
+                        <div class="container mt-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-image">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Tilte</th>
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Article Name</th>
+                                                <th scope="col">Author</th>
+                                                <th scope="col">Archived</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">javascript</th>
+                                                <td class="w-25">
+                                                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                                                </td>
+                                                <td>Bootstrap 4 CDN and Starter Template</td>
+                                                <td>Cristina</td>
+                                                <td>
+                                                    <p class="btn btn-danger">Archived</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">php </th>
+                                                <td class="w-25">
+                                                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                                                </td>
+                                                <td>Bootstrap Grid 4 Tutorial and Examples</td>
+                                                <td>Cristina</td>
+                                                <td>
+                                                    <p class="btn btn-danger">Archived</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
 
 
                     </div>
