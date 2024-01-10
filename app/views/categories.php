@@ -1,3 +1,7 @@
+<?php
+require_once '../controllers/categorieController.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,22 +94,21 @@
                         <div class="modal fade" id="crudModal" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-md">
                                 <div class="modal-content">
-                                <div class="modal-header">
-                                                <h3 class="modal-title text-black fw-bold ">Ajouter Catégorie</h3>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="modal-header">
+                                        <h3 class="modal-title text-black fw-bold ">Ajouter Catégorie</h3>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form method="post">
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Nom Categorie</label>
+                                                <input type="text" class="form-control" name="nom_cat" id="name" placeholder="Nom Categorie" required>
                                             </div>
-                                            <form>
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="name" class="form-label">Nom Categorie</label>
-                                                        <input type="text" class="form-control" id="name" placeholder="Nom Categorie" required>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                                    <button type="submit" class="btn btn-primary">Ajouter Catégorie</button>
-                                                </div>
-                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" name="submit" class="btn btn-primary">Ajouter Catégorie</button>
+                                        </div>
+                                    </form>
 
 
                                 </div>
@@ -124,20 +127,54 @@
 
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td> <i class="fa-solid fa-trash mx-2"></i></td>
-                                    <td><i class="fa-solid fa-pen mx-2"></i></td>
+                            <?php $idcat = null;
+                            foreach ($result as $res) {
+                                $idcat = $res['id_categories'];  ?>
+                                <tbody>
+                                    <tr>
+
+                                        <th scope="row"><?= $res['id_categories'] ?></th>
+                                        <td><?= $res['nom_categorie'] ?>
+                                        </td>
+                                        <td>
+
+                                            <button value="<?= $res['id_categories'] ?>" class="updateHidden btn btn-warning update-btn" data-bs-toggle="modal" data-bs-target="#modifierModal">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <a href="categories.php?id_d=<?= $res['id_categories'] ?>" class="btn btn-danger">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </td>
+
+                                    <?php } ?>
+                                    </tr>
 
 
-                                </tr>
-
-
-                            </tbody>
+                                </tbody>
                         </table>
-
+                        <div class="modal fade" id="modifierModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title text-black fw-bold">Modifier Catégorie</h3>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="/WikisBrief/app/views/categories.php" method="get">
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="nom_cat_modif" class="form-label">Nouveau Nom Categorie</label>
+                                                <input type="text" class="form-control" name="nom_cat_modif" id="nom_cat_modif" placeholder="Nouveau Nom Categorie" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" value="<?= $idcat  ?>" name="id_u" class="btn btn-warning EModal">Modifier Catégorie</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
 
 
                     </div>
@@ -153,7 +190,18 @@
         toggler.addEventListener("click", function() {
             document.querySelector("#sidebar").classList.toggle("collapsed");
         });
+
+        const updatebtn = document.querySelectorAll(".updateHidden");
+        const EModal = document.querySelector(".EModal");
+        updatebtn.forEach(element => {
+            element.addEventListener("click", function() {
+                EModal.value = this.value;
+            });
+        });
     </script>
+
+
+
 </body>
 
 </html>

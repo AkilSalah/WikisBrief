@@ -40,10 +40,16 @@
 
                 </div>
             </div>
+
+
             <a href="" class="login_button">Login</a>
             <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="form-outline" data-mdb-input-init>
+                <input id="search-input" type="search" id="form1" class="form-control mx-3" placeholder="Search" />
+            </div>
+
         </div>
     </nav>
 
@@ -56,28 +62,7 @@
 
     <section class="last_wikis">
         <h1 class="text-center mt-5">Trois dernier wikis</h1>
-        <div class="card flex-md-row rounded-lg bg-white shadow mt-5 w-75 position-relative  ">
-            <img class="card-img-top w-50" src="../../public/images/Wikipedia_svg_logo.png" alt=" " height="250vh">
-            <div class="card-body flex flex-col justify-start p-6">
-                <h5 class="card-title mb-2 mt-3 text-xl font-medium text-dark">
-                    Card title
-                </h5>
-                <p class="card-text mb-4 text-base text-dark">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                </p>
-                <p class="card-text text-muted small position-absolute top-0 end-0 m-3">
-                    Author Name
-                </p>
-                <div class="d-flex justify-content-between">
-                    <p class="card-text text-muted small">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        12/2/2022
-                    </p>
-                    <button class="btn btn-dark ">Découvrez plus</button>
-                </div>
 
-            </div>
-        </div>
 
         <div class="card flex-md-row rounded-lg bg-white mx-auto  shadow mt-5 w-75 position-relative">
             <img class="card-img-top w-50" src="../../public/images/Wikipedia_svg_logo.png" alt=" " height="250vh">
@@ -102,27 +87,6 @@
             </div>
         </div>
 
-        <div class="card flex-md-row rounded-lg bg-white pe-5  shadow mt-5 w-75 position-relative" style="margin-left: 300PX;">
-            <img class="card-img-top w-50" src="../../public/images/Wikipedia_svg_logo.png" alt=" " height="250vh">
-            <div class="card-body flex flex-col justify-start p-6">
-                <h5 class="card-title mb-2 mt-3 text-xl font-medium text-dark">
-                    Card title
-                </h5>
-                <p class="card-text mb-4 text-base text-dark">
-                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                </p>
-                <p class="card-text text-muted small position-absolute top-0 end-0 m-3">
-                    Author Name
-                </p>
-                <div class="d-flex justify-content-between">
-                    <p class="card-text text-muted small">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        12/2/2022
-                    </p>
-                    <button class="btn btn-dark ">Découvrez plus</button>
-                </div>
-            </div>
-        </div>
 
     </section>
     <section>

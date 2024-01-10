@@ -1,3 +1,8 @@
+<?php
+require_once '../controllers/tagController.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,27 +65,27 @@
 
             </div>
         </aside>
-        
+
         <div class="main">
-        <nav class="navbar navbar-expand border-bottom d-flex justify-content-between">
+            <nav class="navbar navbar-expand border-bottom d-flex justify-content-between">
                 <button class="btn" type="button" data-bs-theme="dark" style="font-size: larger;">
                     <span class="fa-solid fa-bars" style="width: 20%;"></span>
                 </button>
-                <div class="d-flex" >
-                <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle " width="40px" height="40px" >
-                <p class="text-black my-auto" >Admin name</p>
-                
+                <div class="d-flex">
+                    <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle " width="40px" height="40px">
+                    <p class="text-black my-auto">Admin name</p>
+
 
                 </div>
             </nav>
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     <div class="mb-3">
-                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
                             <div class="col-6">
                                 <h4 class="text-uppercase fw-bold m-1">Tags</h4>
                             </div>
-                            <div >
+                            <div>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudModal">
                                     Ajouter Tag
                                 </button>
@@ -90,47 +95,84 @@
                         <div class="modal fade" id="crudModal" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-md">
                                 <div class="modal-content">
-                                <div class="modal-header">
-                                                <h3 class="modal-title text-black fw-bold ">Ajouter Tag</h3>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="modal-header">
+                                        <h3 class="modal-title text-black fw-bold ">Ajouter Tag</h3>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form method="POST">
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Nom Tag</label>
+                                                <input type="text" class="form-control" id="name" name="tag" placeholder="Nom Tag" required>
                                             </div>
-                                            <form>
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="name" class="form-label">Nom Tag</label>
-                                                        <input type="text" class="form-control" id="name" placeholder="Nom Categorie" required>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                                    <button type="submit" class="btn btn-primary">Ajouter Tag</button>
-                                                </div>
-                                            </form>
-
-
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" name="submit" class="btn btn-primary">Ajouter Tag</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <table class="table mt-2">
                             <thead>
                                 <tr>
                                     <th scope="col">Id Tag</th>
                                     <th scope="col">Nom Tag</th>
+                                    <th scope="col">Modifier</th>
+                                    <th scope="col">Supprimer</th>
+
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td> <i class="fa-solid fa-trash mx-2"></i></td>
-                                    <td><i class="fa-solid fa-pen mx-2"></i></td>
-                                    
-                                </tr>
-                                
-                               
-                            </tbody>
+                            <?php 
+                            foreach ($result as $res) {
+                                // $idtag = $res['id_tag']; 
+                                 ?>
+                                <tbody>
+                                    <tr>
+
+                                        <th scope="row"><?= $res['id_tag'] ?></th>
+                                        <td><?= $res['nom_tag'] ?>
+                                        </td>
+                                        <td>
+
+                                            <button value="<?= $res['id_tag'] ?>" class="updateHidden btn btn-warning update-btn" data-bs-toggle="modal" data-bs-target="#modifierModal">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <a href="tags.php?id_d=<?=$res['id_tag']?>" class="btn btn-danger">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </td>
+
+                                    <?php } ?>
+                                    </tr>
+
+
+                                </tbody>
                         </table>
+                        <div class="modal fade" id="modifierModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title text-black fw-bold">Modifier Tag</h3>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="/WikisBrief/app/views/tags.php" method="get">
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="nom_tag_modif" class="form-label">Nouveau Nom Tag</label>
+                                                <input type="text" class="form-control" name="nom_tag_modif" id="nom_tag_modif" placeholder="Nouveau Nom Tag" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" value="<?= $idtag  ?>" name="id_u" class="btn btn-warning EModal">Modifier Tag</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
 
 
 
@@ -147,6 +189,16 @@
         toggler.addEventListener("click", function() {
             document.querySelector("#sidebar").classList.toggle("collapsed");
         });
+        const btnU = document.querySelectorAll('.updateHidden');
+        const btnV = document.querySelector('.EModal');
+
+        btnU.forEach(element => {
+            element.addEventListener("click", function(){
+                btnV.value = this.value;
+            });
+        });
+
+
     </script>
 </body>
 

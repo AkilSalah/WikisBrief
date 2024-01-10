@@ -8,7 +8,6 @@ class adminModel{
 public function __construct(){
 
 }
-
 public function __setPassword($password_admin){
     $this->password_admin = $password_admin;
 }
@@ -45,10 +44,42 @@ public function adminLogin() {
     return $user;
 }
 
+public function getCategories(){
+    $sql = db::connect()->prepare("SELECT count(*) FROM categories");
+    $sql->execute();
+    $categories=$sql->fetchAll(PDO::FETCH_ASSOC);
+    return $categories;
+}
+public function getAuteurs(){
+    $sql = db::connect()->prepare("SELECT count(*) FROM users where role = 'auteur' ");
+    $sql->execute();
+    $auteurs=$sql->fetchAll(PDO::FETCH_ASSOC);
+    return $auteurs;
+}
+public function getTags(){
+    $sql = db::connect()->prepare("SELECT count(*) FROM tags");
+    $sql->execute();
+    $tags=$sql->fetchAll(PDO::FETCH_ASSOC);
+    return $tags; 
+}
+public function getWikis(){
+    $sql = db::connect()->prepare("SELECT count(*) FROM wikis");
+    $sql->execute();
+    $wikis=$sql->fetchAll(PDO::FETCH_ASSOC);
+    return $wikis;
+}
+
+
+
+
 
 
 
 }
+
+$admin = new adminModel();
+
+var_dump($admin->getTags());
 
 
 
