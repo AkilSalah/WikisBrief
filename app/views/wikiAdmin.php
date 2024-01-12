@@ -1,6 +1,8 @@
 <?php
-require_once '../controllers/wikisController.php';
 require_once '../controllers/adminController.php';
+
+
+
 
 ?>
 
@@ -33,31 +35,31 @@ require_once '../controllers/adminController.php';
                 </div>
 
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="adminDash.php" class="sidebar-link">
                         <i class="fa-solid fa-chart-simple pe-2"></i>
                         Dashboard
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="categories.php" class="sidebar-link">
                         <i class="fa-solid fa-list pe-2"></i>
                         Catégories
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="tags.php" class="sidebar-link">
                         <i class="fa-solid fa-tag pe-2"></i>
                         Tags
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="wikiAdmin.php" class="sidebar-link">
                         <i class="fa-brands fa-wikipedia-w pe-2"></i>
                         Wikis
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="logout.php" class="sidebar-link">
                         <i class="fa-solid fa-right-from-bracket pe-2"></i>
                         Logout
                     </a>
@@ -74,7 +76,7 @@ require_once '../controllers/adminController.php';
                 </button>
                 <div class="d-flex">
                     <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle " width="40px" height="40px">
-                    <p class="text-black my-auto">Admin name</p>
+                    <p class="text-black my-auto"><?=$admin['nom'] ?> <?=$admin['prenom'] ?></p>
 
 
                 </div>
@@ -93,7 +95,7 @@ require_once '../controllers/adminController.php';
                                             <tr>
                                                 <th scope="col">Tilte</th>
                                                 <th scope="col">Image</th>
-                                                <th scope="col">Article Name</th>
+                                                <th scope="col"> Content</th>
                                                 <th scope="col">Author</th>
                                                 <th scope="col">Archived</th>
                                             </tr>
@@ -112,10 +114,12 @@ require_once '../controllers/adminController.php';
                                                 <td><?=$wiki['wiki_content'] ?></td>
                                                 <td><?= $wiki['nom'] ?> <?= $wiki['prenom'] ?></td> 
                                                 <td>
-                                                    <form method="post" >
-                                                      <a href="?idArchive=<?=$wiki['id_wiki']?> "><input type="submit" class="btn btn-danger" name="archive" value="Archived"></a>  
-                                                    </form>
-                                                </td>
+                                                <form method="post">
+                                                        <a href="?idArchive=<?=$wiki['id_wiki']?>"><input type="submit" class="btn btn-danger " name="archive" value="Archiver"></a>
+                                                        <a href="?idNoArchive=<?=$wiki['id_wiki']?>"><input type="submit" class="btn btn-success " name="inArchive" value="désarchiver"></a>
+                                                </form>
+                                            </td>
+
                                             </tr>
                                            <?php }?>
                                         </tbody>

@@ -74,7 +74,7 @@ require_once '../controllers/wikisController.php';
         
         ?>
         <div class="card flex-md-row rounded-lg bg-white mx-auto  shadow mt-5 w-75 position-relative">
-            <img class="card-img-top w-50" src="../../public/images/<?=$treeW['wiki_image'] ?> alt="" height="250vh">
+            <img class="card-img-top w-50" src="<?=$treeW ['wiki_image'] ?>" alt="" height="250vh">
             <div class="card-body flex flex-col justify-start p-6">
                 <h5 class="card-title mb-2 mt-3 text-xl font-medium text-dark">
                     <?=$treeW['wiki_titre'] ?>
@@ -110,7 +110,7 @@ require_once '../controllers/wikisController.php';
                     <p class="card-text">
                         <div class="text-muted d-flex justify-content-between">
                             <div><i class="far fa-user"></i> <?= $wiik['nom'] ?> <?= $wiik['prenom'] ?></div>
-                            <div><i class="fas fa-calendar-alt"></i> <?= $wiik['date'] ?></div>
+                            <div><i class="fas fa-calendar-alt"></i> <?php echo (new DateTime($wiik['date']))->format('Y-m-d'); ?></div>
                         </div>
                     </p>
                     <img class="card-img-top" src="<?= $wiik['wiki_image'] ?>" alt="Card image cap">

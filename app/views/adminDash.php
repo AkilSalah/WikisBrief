@@ -31,31 +31,31 @@ require_once '../controllers/adminController.php';
           <a href="#">Wiképidia</a>
         </div>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="adminDash.php" class="sidebar-link">
             <i class="fa-solid fa-chart-simple"></i>
             Dashboard
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="categories.php" class="sidebar-link">
             <i class="fa-solid fa-list pe-2"></i>
             Catégories
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="tags.php" class="sidebar-link">
             <i class="fa-solid fa-tag"></i>
             Tags
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="wikiAdmin.php" class="sidebar-link">
             <i class="fa-brands fa-wikipedia-w"></i>
             Wikis
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="logout.php" class="sidebar-link">
             <i class="fa-solid fa-right-from-bracket"></i>
             Logout
           </a>

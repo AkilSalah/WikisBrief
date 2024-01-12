@@ -1,5 +1,8 @@
 <?php
+require_once '../controllers/adminController.php';
+
 require_once '../controllers/tagController.php';
+
 ?>
 
 
@@ -32,31 +35,31 @@ require_once '../controllers/tagController.php';
                 </div>
 
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="adminDash.php" class="sidebar-link">
                         <i class="fa-solid fa-chart-simple pe-2"></i>
                         Dashboard
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="categories.php" class="sidebar-link">
                         <i class="fa-solid fa-list pe-2"></i>
                         Catégories
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="tags.php" class="sidebar-link">
                         <i class="fa-solid fa-tag pe-2"></i>
                         Tags
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="wikiAdmin.php" class="sidebar-link">
                         <i class="fa-brands fa-wikipedia-w pe-2"></i>
                         Wikis
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="logout.php" class="sidebar-link">
                         <i class="fa-solid fa-right-from-bracket pe-2"></i>
                         Logout
                     </a>
@@ -73,7 +76,7 @@ require_once '../controllers/tagController.php';
                 </button>
                 <div class="d-flex">
                     <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle " width="40px" height="40px">
-                    <p class="text-black my-auto">Admin name</p>
+                    <p class="text-black my-auto"><?=$admin['nom'] ?> <?=$admin['prenom'] ?></p>
 
 
                 </div>
@@ -125,7 +128,7 @@ require_once '../controllers/tagController.php';
                                 </tr>
                             </thead>
                             <?php 
-                            foreach ($result as $res) {
+                            foreach ($resultt as $res) {
                                 // $idtag = $res['id_tag']; 
                                  ?>
                                 <tbody>

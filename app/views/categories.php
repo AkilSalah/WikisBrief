@@ -1,4 +1,6 @@
 <?php
+require_once '../controllers/adminController.php';
+
 require_once '../controllers/categorieController.php';
 ?>
 
@@ -31,31 +33,31 @@ require_once '../controllers/categorieController.php';
                 </div>
 
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="adminDash.php" class="sidebar-link">
                         <i class="fa-solid fa-chart-simple"></i>
                         Dashboard
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="categories.php" class="sidebar-link">
                         <i class="fa-solid fa-list pe-2"></i>
                         Catégories
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="tags.php" class="sidebar-link">
                         <i class="fa-solid fa-tag"></i>
                         Tags
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="wikiAdmin.php" class="sidebar-link">
                         <i class="fa-brands fa-wikipedia-w"></i>
                         Wikis
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="logout.php" class="sidebar-link">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         Logout
                     </a>
@@ -72,7 +74,7 @@ require_once '../controllers/categorieController.php';
                 </button>
                 <div class="d-flex">
                     <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle " width="40px" height="40px">
-                    <p class="text-black my-auto">Admin name</p>
+                    <p class="text-black my-auto"> <?=$admin['nom'] ?> <?=$admin['prenom'] ?> </p>
 
 
                 </div>
@@ -128,7 +130,7 @@ require_once '../controllers/categorieController.php';
                                 </tr>
                             </thead>
                             <?php $idcat = null;
-                            foreach ($result as $res) {
+                            foreach ($resultcat as $res) {
                                 $idcat = $res['id_categories'];  ?>
                                 <tbody>
                                     <tr>

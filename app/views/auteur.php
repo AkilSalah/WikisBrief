@@ -37,13 +37,13 @@ require_once '../controllers/userController.php';
                 </div>
 
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="auteur.php" class="sidebar-link">
                         <i class="fa-solid fa-chart-simple"></i>
                         Ajouter Wikis
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="logout.php" class="sidebar-link">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         Logout
                     </a>
@@ -86,7 +86,7 @@ require_once '../controllers/userController.php';
                                         <h3 class="modal-title text-black fw-bold">Ajouter Wiki</h3>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form method="post">
+                                    <form method="post" enctype="multipart/form-data" >
                                         <div class="modal-body">
                                             <div>
                                                 <label for="nom" class="form-label">Nom Wiki</label>
@@ -145,37 +145,38 @@ require_once '../controllers/userController.php';
 
                         </div>
                     </div>
-                    <?php
-                    foreach ($result as $wiki) {
-                    ?>
-                        <div class="card h-50" style="width: 30%;">
-
-                            <div class="view overlay">
-                                <img class="card-img-top" src="<?= $wiki['wiki_image'] ?>" alt="Card image cap">
-
-                            </div>
-
-                            <div class="card-body elegant-color white-text">
-
-                                <h4 class="card-title"><?= $wiki['wiki_titre'] ?></h4>
-                                <p class="card-text white-text ">
-                                    <?= $wiki['wiki_content'] ?>
-                                </p>
-                                <div class="d-flex justify-content-around ">
-                                    <button value="<?= $res['id_wiki'] ?>" class="updateHidden btn btn-warning update-btn" data-bs-toggle="modal" data-bs-target="#modifierModal">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-
-                                    <a href="auteur.php?id_d=<?= $res['id_wiki'] ?>" class="btn btn-danger">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
+                   
+                       <div class="container">
+                        <div class="row">
+                        <?php
+                        foreach ($result as $wiki) {
+                        ?>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="view overlay">
+                                            <img class="card-img-top" src="<?= $wiki['wiki_image'] ?>" alt="Card image cap">
+                                        </div>
+                                        <div class="card-body elegant-color white-text">
+                                            <h4 class="card-title"><?= $wiki['wiki_titre'] ?></h4>
+                                            <p class="card-text white-text"><?= $wiki['wiki_content'] ?></p>
+                                            <div class="d-flex justify-content-around">
+                                                <a href="auteur.php?idWikiUpdate=<?= $wiki['id_wiki'] ?>">
+                                                 <button value="<?= $wiki['id_wiki'] ?>" class="updateHidden btn btn-warning update-btn" data-bs-toggle="modal" data-bs-target="#modifierModal">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </button>   
+                                                </a>
+                                                <a href="auteur.php?id_d=<?= $wiki['id_wiki'] ?>" class="btn btn-danger">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-
-                            </div>
-
+                            <?php } ?>
                         </div>
-                    <?php } ?>
+                    </div>
+
+                    
 
                 </div>
         </div>
@@ -188,7 +189,7 @@ require_once '../controllers/userController.php';
                     <h3 class="modal-title text-black fw-bold">Modifier Wiki</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="post" enctype="multipart/form-data" >
+                <form action="/WikisBrief/app/views/auteur.php" method="get" enctype="multipart/form-data" >
                     <div class="modal-body">
                         <div>
                             <label for="nom" class="form-label">Nom Wiki</label>
@@ -233,7 +234,7 @@ require_once '../controllers/userController.php';
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" name="submit" class="btn btn-primary">Modifier Wiki</button>
+                            <button type="submit" value="<?=  $id_wiki ?>" name="modifier"  class="btn btn-primary">Modifier Wiki</button>
                         </div>
                     </div>
                 </form>

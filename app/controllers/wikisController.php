@@ -18,13 +18,16 @@ class WikisController {
         if (
             isset($_POST['submitt']) &&
             !empty($_POST['nomW']) &&
-            !empty($_POST['image']) &&
+            !empty($_FILES['image'])&&
             isset($_POST['options']) &&
             !empty($_POST['categoriesW']) &&
             !empty($_POST['descriptionW'])
         ) {
+            $image_name = $_FILES['image']['name'];
+            $image_tmp = $_FILES['image']['tmp_name'];
+            $image_path = '../../public/images/'.$image_name;
+            move_uploaded_file($image_tmp, $image_path);
             $nom = $_POST['nomW'];
-            $image = $_POST['image'];
             $selectedTags = $_POST["options"];
             $jsonTags = json_encode($selectedTags);
             $categories = $_POST['categoriesW'];
@@ -34,7 +37,7 @@ class WikisController {
             $this->wikis->setTitreWiki($nom);
             $this->wikis->setContentWiki($description);
             $this->wikis->setStatusWiki($statut);
-            $this->wikis->setImageWiki($image);
+            $this->wikis->setImageWiki( $image_path);
             $this->wikis->setWikiCategorie($categories);
             $this->wikis->setWikiTags($jsonTags);
     
@@ -46,16 +49,46 @@ class WikisController {
             
             foreach ($selectedTags as $tag){
                 $this->wikis->insertWikiTags($lastId,$tag);
-            }
-            die();
-            if ($this->wikis->insertWiki()) {
                 header('location: ../views/auteur.php');
-                exit();
-            } else {
-                echo "Erreur lors de l'insertion du wiki.";
+
             }
+            // die();
+            // if ($this->wikis->insertWiki()) {
+            //     header('location: ../views/auteur.php');
+            //     exit();
+            // } else {
+            //     echo "Erreur lors de l'insertion du wiki.";
+            // }
         }
     }
+
+    public function deleteWiki (){
+        if (isset($_GET['id_d'])){
+          $id_wiki = $_GET['id_d'];
+                $this->wikis->setIdWiki($id_wiki);
+                $this->wikis->deleteWikis();
+        }
+    }
+
+    public function updateWiki(){
+        if (isset($_GET['idWikiUpdate'])){
+        $id_W = $_GET['idWikiUpdate'];
+        $this->wikis->setIdWiki($id_W);
+        $this->wikis->setImageWiki($_GET['image'] );
+        $this->wikis->setTitreWiki($_GET['nom'] );
+        $this->wikis->setWikiCategorie($_GET['categories'] );
+        $this->wikis->setWikiTags($_GET['categories'] );
+        $this->wikis->setContentWiki($_GET['description'] );
+
+        if ($this->wikis->updateWikis()) {
+            header('location: ../views/auteur.php');
+            exit();
+        }
+
+
+    }
+    }
+
     
 
     public function afficheWikisAuteur() {
@@ -80,24 +113,34 @@ class WikisController {
             // $this->wikis->archiveWiki();
         }
     }
-
+ 
 } 
 
-$wikisController = new WikisController();
+    $wikisController = new WikisController();
 
-if (isset($_POST['submitt'])) {
-    $wikisController->addWiki();
+    if (isset($_POST['submitt'])) {
+        $wikisController->addWiki();
 
-}
-$result = $wikisController->afficheWikisAuteur();
+    }
+    $result = $wikisController->afficheWikisAuteur();
 
-$tree = $wikisController->affiche3Wikis();
-$all = $wikisController->afficheAllWikis();
+    $tree = $wikisController->affiche3Wikis();
+    $all = $wikisController->afficheAllWikis();
 
-if (isset($_GET['idArchive'])) {
+    if (isset($_GET['idArchive'])) {
 
-    $wikisController->archive();
-   }
+        $wikisController->archive();
+    }
+
+    if(isset($_GET['id_d'])) {
+        $wikisController->deleteWiki();
+        header("Location: /WikisBrief/app/views/auteur.php");
+    }
+
+    if(isset($_GET['modifier'])){
+        $wikisController->updateWiki();
+        header("Location: /WikisBrief/app/views/auteur.php");
+    }
 
 
 
