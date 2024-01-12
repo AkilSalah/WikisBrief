@@ -155,7 +155,7 @@ class Wikis {
         
             $sql2->execute();
         
-            
+
         }
         
 

@@ -1,6 +1,8 @@
 <?php 
+require_once '../models/Admin.php';
 require_once '../models/wikis.php';
 require_once '../models/User.php';
+
 session_start();
 
 
@@ -84,10 +86,13 @@ class WikisController {
             header('location: ../views/auteur.php');
             exit();
         }
-
-
     }
     }
+
+    
+    
+
+
 
     
 
@@ -113,9 +118,7 @@ class WikisController {
             // $this->wikis->archiveWiki();
         }
     }
- 
 } 
-
     $wikisController = new WikisController();
 
     if (isset($_POST['submitt'])) {
