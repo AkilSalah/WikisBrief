@@ -164,14 +164,14 @@ class Wikis {
     
 
         public function selectLastWikis(){
-        $sql = db::connect()->prepare("SELECT * FROM wikis join users on wikis.id_user = users.id_utilisateur ORDER BY id_wiki DESC LIMIT 3");
+        $sql = db::connect()->prepare("SELECT * FROM wikis join users on wikis.id_user = users.id_utilisateur WHERE statut = 'noArchived' ORDER BY id_wiki DESC LIMIT 3");
         $sql->execute();
         $lastWikis = $sql->fetchAll();
         return $lastWikis;
     }
 
     public function allWikis(){
-        $sql = db::connect()->prepare("SELECT * FROM wikis join users on wikis.id_user = users.id_utilisateur ORDER BY id_wiki DESC ");
+        $sql = db::connect()->prepare("SELECT * FROM wikis join users on wikis.id_user = users.id_utilisateur WHERE statut = 'noArchived' ORDER BY id_wiki DESC ");
         $sql->execute();
         $allWikis = $sql->fetchAll();
         return $allWikis;

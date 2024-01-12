@@ -57,6 +57,23 @@ class AdminController {
         return $result;
     }
 
+    public function archiverWiki(){
+        if(isset($_GET['idArchive'])){
+            $idWikiA = $_GET['idArchive'];
+            $this->adminModel->archiverWiki($idWikiA);
+
+        }
+    }
+
+    public function deArchiver (){
+        if (isset($_GET['idNoArchive'] )){
+            $idWikid = $_GET['idNoArchive'];
+            
+            $this->adminModel->desarchiverWiki($idWikid); 
+
+        }
+    }
+
     
 }
 
@@ -75,5 +92,13 @@ $allWikis = $adminController->afficherWikis();
 
 $admin = $adminController->admin();
 
+if(isset($_GET['idArchive'])){
+    $adminController->archiverWiki();
+    header("Location: /WikisBrief/app/views/wikiAdmin.php");
+}
+if(isset($_GET['idNoArchive'])){
+    $adminController->deArchiver();
+    header("Location: /WikisBrief/app/views/wikiAdmin.php");
+}
 
 ?>

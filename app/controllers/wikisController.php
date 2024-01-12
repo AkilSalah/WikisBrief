@@ -10,9 +10,12 @@ class WikisController {
     private $wikis;
     private $userWikis;
 
+    private $addminWiki;
+
     public function __construct(){
         $this->wikis = new Wikis();
         $this->userWikis = new User();
+        $this->addminWiki = new adminModel();
 
     }
 
@@ -89,12 +92,7 @@ class WikisController {
     }
     }
 
-    
-    
 
-
-
-    
 
     public function afficheWikisAuteur() {
         if(isset($_SESSION['AuteurEmail'] )) {
@@ -113,11 +111,11 @@ class WikisController {
         return $wikis;
     }
 
-    public function archive() {
-        if (isset($_POST['archive'])) {
-            // $this->wikis->archiveWiki();
-        }
-    }
+    // public function archive() {
+    //     if (isset($_POST['archive'])) {
+    //         // $this->wikis->archiveWiki();
+    //     }
+    // }
 } 
     $wikisController = new WikisController();
 
@@ -130,10 +128,10 @@ class WikisController {
     $tree = $wikisController->affiche3Wikis();
     $all = $wikisController->afficheAllWikis();
 
-    if (isset($_GET['idArchive'])) {
+    // if (isset($_GET['idArchive'])) {
 
-        $wikisController->archive();
-    }
+    //     $wikisController->archive();
+    // }
 
     if(isset($_GET['id_d'])) {
         $wikisController->deleteWiki();
@@ -144,6 +142,8 @@ class WikisController {
         $wikisController->updateWiki();
         header("Location: /WikisBrief/app/views/auteur.php");
     }
+
+
 
 
 
