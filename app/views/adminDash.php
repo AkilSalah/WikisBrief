@@ -1,3 +1,8 @@
+<?php 
+require_once '../controllers/adminController.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,8 +70,8 @@
           <span class="fa-solid fa-bars" style="width: 20%;"></span>
         </button>
         <div class="d-flex">
-          <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle " width="40px" height="40px">
-          <p class="text-black my-auto">Admin name</p>
+          <img src="../../public/images/7O2A0186.JPG" alt="" class="rounded-circle mx-1 " width="40px" height="40px">
+          <p class="text-black my-auto"><?=$admin['nom'] ?> <?=$admin['prenom'] ?></p>
 
 
         </div>
@@ -96,7 +101,9 @@
                             <span>All posts</span>
                           </div>
                           <div class="align-self-center">
-                            <h1>18,000</h1>
+                           
+                          <h1><?php echo $wikis['count(*)']; ?></h1>
+                         
                           </div>
                         </div>
                       </div>
@@ -117,7 +124,7 @@
                             <span>wikis auteurs</span>
                           </div>
                           <div class="align-self-center">
-                            <h1>84,695</h1>
+                            <h1><?php echo $auteur['count(*)']; ?></h1>
                           </div>
                         </div>
                       </div>
@@ -140,7 +147,7 @@
                             <span>All Categories</span>
                           </div>
                           <div class="align-self-center">
-                            <h1>18,000</h1>
+                          <h1><?php echo $cats['count(*)']; ?></h1>
                           </div>
                         </div>
                       </div>
@@ -161,7 +168,7 @@
                             <span>All Tags</span>
                           </div>
                           <div class="align-self-center">
-                            <h1>84,695</h1>
+                            <h1><?php echo $tags['count(*)'] ; ?></h1>
                           </div>
                         </div>
                       </div>

@@ -1,5 +1,6 @@
 <?php
 require_once '../controllers/adminController.php';
+require_once '../controllers/userController.php';
 ?>
 
 <!DOCTYPE html>

@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
     $Categories->addCategorie();
 }
 
-$result = $Categories->afficherCategorie();
+$resultcat = $Categories->afficherCategorie();
 
 if (isset($_GET['id_d'])) {
 

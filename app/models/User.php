@@ -59,11 +59,41 @@ public function insertUser(){
     ("INSERT INTO users (nom ,prenom,email,password,role)
      values(:nom,:prenom,:email,:password,:Role)");
       $sql->bindParam(':nom', $this->nom_user);
-      $sql->bindParam(':prenom', $this->email_user);
-      $sql->bindParam(':email', $this->password_user);
-      $sql->bindParam(':password', $this->prenom_user);
+      $sql->bindParam(':prenom',  $this->prenom_user);
+      $sql->bindParam(':email', $this->email_user);
+      $sql->bindParam(':password', $this->password_user);
       $sql->bindParam(':Role', $this->role_user);
       $sql->execute();
+}
+
+public function auteurlogin() {
+    $role = $this->getRoleUser();
+    $email = $this->getEmailUser();
+    $sql = db::connect()->prepare("SELECT * FROM users WHERE email = :email AND role = :role " );
+    $sql->bindParam(':role', $role);
+    $sql->bindParam(':email', $email);
+    $sql->execute();
+    $auteur = $sql->fetch(PDO::FETCH_ASSOC);
+    return $auteur;
+}
+
+public function getAuteur(){
+    $role = $this->getRoleUser();
+    $email = $this->getEmailUser();
+    $sql = db::connect()->prepare("SELECT * FROM users where role = :role and email =:email  ");
+    $sql->bindParam(':role', $role);
+    $sql->bindParam(':email',$email);
+    $sql->execute();
+    $auetur = $sql->fetch();
+    return $auetur;
+}
+
+public function selectWikis() {
+    $sql = db::connect()->prepare("SELECT * FROM wikis JOIN users ON users.id_utilisateur = wikis.id_user WHERE email = :email ");
+    $sql->bindParam(':email', $this->email_user);
+    $sql->execute();
+    $wikis = $sql->fetchAll(PDO::FETCH_ASSOC);
+    return $wikis;
 }
 
 

@@ -1,3 +1,9 @@
+<?php
+require_once '../controllers/wikisController.php';
+require_once '../controllers/adminController.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,28 +99,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                           <?php 
+                                           foreach ($allWikis as $wiki){
+
+                                           
+                                           ?> 
                                             <tr>
-                                                <th scope="row">javascript</th>
+                                                <th scope="row "><?=$wiki['wiki_titre'] ?></th>
                                                 <td class="w-25">
-                                                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                                                    <img src="<?=$wiki['wiki_image'] ?>" class="img-fluid img-thumbnail" alt="image">
                                                 </td>
-                                                <td>Bootstrap 4 CDN and Starter Template</td>
-                                                <td>Cristina</td>
+                                                <td><?=$wiki['wiki_content'] ?></td>
+                                                <td><?= $wiki['nom'] ?> <?= $wiki['prenom'] ?></td> 
                                                 <td>
-                                                    <p class="btn btn-danger">Archived</p>
+                                                    <form method="post" >
+                                                      <a href="?idArchive=<?=$wiki['id_wiki']?> "><input type="submit" class="btn btn-danger" name="archive" value="Archived"></a>  
+                                                    </form>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">php </th>
-                                                <td class="w-25">
-                                                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep">
-                                                </td>
-                                                <td>Bootstrap Grid 4 Tutorial and Examples</td>
-                                                <td>Cristina</td>
-                                                <td>
-                                                    <p class="btn btn-danger">Archived</p>
-                                                </td>
-                                            </tr>
+                                           <?php }?>
                                         </tbody>
                                     </table>
                                 </div>

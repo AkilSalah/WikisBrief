@@ -1,5 +1,6 @@
 <?php 
 require_once '../config/db.php';
+
 class adminModel{
     private $email_admin;
     private $password_admin;
@@ -35,7 +36,7 @@ public function setRoleAdmin($role_admin) {
 public function adminLogin() {
     $role = $this->getRoleAdmin();
     $email = $this->getEmailAdmin();
-    $sql = db::connect()->prepare("SELECT * FROM users WHERE email = :email AND role = :role");
+    $sql = db::connect()->prepare("SELECT * FROM users WHERE email = :email AND role = :role" );
     $sql->bindParam(':role', $role);
     $sql->bindParam(':email', $email);
     $sql->execute();
@@ -44,28 +45,46 @@ public function adminLogin() {
     return $user;
 }
 
+public function getAdmin(){
+    $role = $this->getRoleAdmin();
+    $email = $this->getEmailAdmin();
+    $sql = db::connect()->prepare("SELECT * FROM users where role = :role and email =:email  ");
+    $sql->bindParam(':role', $role);
+    $sql->bindParam(':email',$email);
+    $sql->execute();
+    $admin = $sql->fetch();
+    return $admin;
+}
+
 public function getCategories(){
     $sql = db::connect()->prepare("SELECT count(*) FROM categories");
     $sql->execute();
-    $categories=$sql->fetchAll(PDO::FETCH_ASSOC);
+    $categories=$sql->fetch();
     return $categories;
 }
 public function getAuteurs(){
     $sql = db::connect()->prepare("SELECT count(*) FROM users where role = 'auteur' ");
     $sql->execute();
-    $auteurs=$sql->fetchAll(PDO::FETCH_ASSOC);
+    $auteurs=$sql->fetch();
     return $auteurs;
 }
 public function getTags(){
     $sql = db::connect()->prepare("SELECT count(*) FROM tags");
     $sql->execute();
-    $tags=$sql->fetchAll(PDO::FETCH_ASSOC);
+    $tags=$sql->fetch();
     return $tags; 
 }
-public function getWikis(){
+public function getWikiStatic(){
     $sql = db::connect()->prepare("SELECT count(*) FROM wikis");
     $sql->execute();
-    $wikis=$sql->fetchAll(PDO::FETCH_ASSOC);
+    $wikis=$sql->fetch();
+    return $wikis;
+}
+
+public function selectWikis(){
+    $sql = db::connect()->prepare("SELECT * from wikis join users on users.id_utilisateur = wikis.id_user");
+    $sql->execute();
+    $wikis=$sql->fetchAll();
     return $wikis;
 }
 
@@ -75,11 +94,10 @@ public function getWikis(){
 
 
 
+
 }
 
-$admin = new adminModel();
 
-var_dump($admin->getTags());
 
 
 

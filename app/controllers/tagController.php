@@ -49,7 +49,7 @@ class TagController {
 }
 
 $tagController = new TagController();
-$result = $tagController->getTags();
+$resultt = $tagController->getTags();
 
 if(isset($_POST['submit']) ){
     $tagController->addTag();
