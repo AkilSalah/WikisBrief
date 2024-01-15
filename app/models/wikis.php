@@ -138,30 +138,31 @@ class Wikis {
 
         public function updateWikis(){
             $connection = db::connect();
-        
+            
             $sql = $connection->prepare("UPDATE wikis SET wiki_titre = :wiki_titre, wiki_content = :wiki_content, wiki_image = :wiki_image, id_categorie = :id_categorie WHERE id_wiki = :id_wiki");
-        
+            
             $sql->bindParam(':id_wiki', $this->id_wiki);
             $sql->bindParam(':wiki_titre', $this->titre_wiki);
             $sql->bindParam(':wiki_content', $this->content_wiki);
             $sql->bindParam(':wiki_image', $this->image_wiki);
             $sql->bindParam(':id_categorie', $this->wiki_categorie);
-        
+            
             $sql->execute();
-        
-            $sql2 = $connection->prepare("UPDATE wikis_tags SET id_tag = :id_tag WHERE id_wiki = :wiki_id");
-            $sql2->bindParam(':id_tag', $this->id_tags);
-            $sql2->bindParam(':wiki_id', $this->id_wiki);
-        
-            $sql2->execute();
-        
-
+            
+            $sqlDeleteTags = $connection->prepare("DELETE FROM wikis_tags WHERE id_wiki = :id_wiki");
+            $sqlDeleteTags->bindParam(':id_wiki', $this->id_wiki);
+            $sqlDeleteTags->execute();
+            
+            if (!empty($this->id_tags)) {
+                foreach ($this->id_tags as $tagId) {
+                    $sqlInsertTags = $connection->prepare("INSERT INTO wikis_tags (id_wiki, id_tag) VALUES (:id_wiki, :id_tag)");
+                    $sqlInsertTags->bindParam(':id_wiki', $this->id_wiki);
+                    $sqlInsertTags->bindParam(':id_tag', $tagId);
+                    $sqlInsertTags->execute();
+                }
+            }
         }
         
-
-
-
-    
 
         public function selectLastWikis(){
         $sql = db::connect()->prepare("SELECT * FROM wikis join users on wikis.id_user = users.id_utilisateur WHERE statut = 'noArchived' ORDER BY id_wiki DESC LIMIT 3");
@@ -177,20 +178,42 @@ class Wikis {
         return $allWikis;
     }
 
-
-
+    public function search(){
+        $sql = db::connect()->prepare("SELECT *
+            FROM wikis 
+            JOIN categories ON wikis.id_categorie = categories.id_categories
+            JOIN wikis_tags ON wikis.id_wiki = wikis_tags.id_wiki
+            JOIN tags ON wikis_tags.id_tag = tags.id_tag 
+            JOIN users ON wikis.id_user = users.id_utilisateur
+            WHERE (nom_categorie LIKE :nom_categorie OR nom_tag LIKE :nom_tag OR
+             wiki_titre LIKE :wiki_titre) AND statut = 'noArchived'");
+    
+        $nomCategorie = '%' . $this->wiki_categorie . '%';
+        $nomTag = '%' . $this->id_tags . '%';
+        $nomWiki = '%' . $this->titre_wiki . '%';
+    
+        $sql->bindParam(':nom_categorie', $nomCategorie);
+        $sql->bindParam(':nom_tag', $nomTag);
+        $sql->bindParam(':wiki_titre', $nomWiki);
+    
+        $sql->execute();
+    
+        $search = $sql->fetchAll();
+        return $search;
     }
     
-    
-
-    
-    
-    
-    
-    
-    
-    
-
-    
-
-?>
+    public function wikisByCatagorie(){
+        $sql = db::connect()->prepare("SELECT * FROM wikis JOIN users ON wikis.id_user = users.id_utilisateur WHERE id_categorie  = :id_categories AND statut = 'noArchived'");
+        $sql->bindParam(':id_categories', $this->wiki_categorie);
+        $sql->execute();
+        $wikis = $sql->fetchAll();
+        return $wikis; 
+    }
+    public function singleWiki(){
+        $sql = db::connect()->prepare("SELECT * FROM wikis join users ON wikis.id_user = users.id_utilisateur WHERE id_wiki = :id_wiki ");
+        $sql->bindParam(':id_wiki',$this->id_wiki);
+        $sql->execute();
+        $wiki = $sql->fetch();
+        return $wiki;
+    }
+    }

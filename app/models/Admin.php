@@ -37,7 +37,7 @@ public function adminLogin() {
     $role = $this->getRoleAdmin();
     $email = $this->getEmailAdmin();
     $sql = db::connect()->prepare("SELECT * FROM users WHERE email = :email AND role = :role" );
-    $sql->bindParam(':role', $role);
+    $sql->bindParam(':role', $role); 
     $sql->bindParam(':email', $email);
     $sql->execute();
 
@@ -45,7 +45,7 @@ public function adminLogin() {
     return $user;
 }
 
-public function getAdmin(){
+public function getAdmin(){ 
     $role = $this->getRoleAdmin();
     $email = $this->getEmailAdmin();
     $sql = db::connect()->prepare("SELECT * FROM users where role = :role and email =:email  ");

@@ -1,21 +1,17 @@
-<?php 
+<?php
+if (session_status() != 2) {
+    session_start();
+}
 require_once '../models/Admin.php';
 require_once '../models/wikis.php';
 require_once '../models/User.php';
-
-session_start();
-
-
 class WikisController {
     private $wikis;
     private $userWikis;
 
-    private $addminWiki;
-
     public function __construct(){
         $this->wikis = new Wikis();
         $this->userWikis = new User();
-        $this->addminWiki = new adminModel();
 
     }
 
@@ -76,26 +72,32 @@ class WikisController {
     }
 
     public function updateWiki(){
-        if (isset($_GET['idWikiUpdate'])){
-        $id_W = $_GET['idWikiUpdate'];
-        $this->wikis->setIdWiki($id_W);
-        $this->wikis->setImageWiki($_GET['image'] );
-        $this->wikis->setTitreWiki($_GET['nom'] );
-        $this->wikis->setWikiCategorie($_GET['categories'] );
-        $this->wikis->setWikiTags($_GET['categories'] );
-        $this->wikis->setContentWiki($_GET['description'] );
-
-        if ($this->wikis->updateWikis()) {
-            header('location: ../views/auteur.php');
-            exit();
+        if (isset($_POST['modifier'])){
+            $id_W = $_POST['modifier'];
+    
+            if (!empty($_FILES['image'])) {
+                $image_name = $_FILES['image']['name'];
+                $image_tmp = $_FILES['image']['tmp_name'];
+                $image_path = '../../public/images/'.$image_name;
+                move_uploaded_file($image_tmp, $image_path);
+                
+                $this->wikis->setIdWiki($id_W);
+                $this->wikis->setImageWiki($image_path);
+                $this->wikis->setTitreWiki($_POST['nom']);
+                $this->wikis->setWikiCategorie($_POST['categories']);
+                $this->wikis->setWikiTags($_POST['options']); 
+                $this->wikis->setContentWiki($_POST['description']);
+                
+                if ($this->wikis->updateWikis()) {
+                    header('location: ../views/auteur.php');
+                    exit();
+                }
+            }
         }
     }
-    }
-
-
-
+    
     public function afficheWikisAuteur() {
-        if(isset($_SESSION['AuteurEmail'] )) {
+        if(isset($_SESSION['AuteurEmail'])) {
         $this->userWikis->setEmailUser($_SESSION['AuteurEmail']);
          $result = $this->userWikis->selectWikis();
         return $result;   
@@ -106,16 +108,43 @@ class WikisController {
         $treeWiki = $this->wikis->selectLastWikis();
         return $treeWiki;
     }
-    public function afficheAllWikis(){
-        $wikis = $this->wikis->allWikis();
-        return $wikis;
+    // public function afficheAllWikis(){
+    //     $wikis = $this->wikis->allWikis();
+    //     return $wikis;
+    // }
+
+    public function search(){
+        if (isset($_GET['searchText'])){
+            $searchValue = $_GET['searchText'];
+    
+            $this->wikis->setTitreWiki($searchValue);
+            $this->wikis->setWikiCategorie($searchValue);
+            $this->wikis->setWikiTags($searchValue);
+    
+            $searchResults = $this->wikis->search();
+            return $searchResults;
+        }
+    }
+    public function wikisCategorie(){
+        if (isset($_GET['id_cat'])){
+            $cat = $_GET['id_cat'];
+            $this->wikis->setWikiCategorie($cat);
+            $wikisFilter =$this->wikis->wikisByCatagorie();
+            return $wikisFilter;
+        }
     }
 
-    // public function archive() {
-    //     if (isset($_POST['archive'])) {
-    //         // $this->wikis->archiveWiki();
-    //     }
-    // }
+    public function singleWikis(){
+        if(isset($_GET['single'])){
+         $single=$_GET['single'];
+         $this->wikis->setIdWiki($single);   
+        $wikis = $this->wikis->singleWiki();
+        return $wikis;
+    }
+}
+    
+
+
 } 
     $wikisController = new WikisController();
 
@@ -124,27 +153,28 @@ class WikisController {
 
     }
     $result = $wikisController->afficheWikisAuteur();
-
-    $tree = $wikisController->affiche3Wikis();
-    $all = $wikisController->afficheAllWikis();
-
-    // if (isset($_GET['idArchive'])) {
-
-    //     $wikisController->archive();
-    // }
+    // $all = $wikisController->afficheAllWikis();
 
     if(isset($_GET['id_d'])) {
         $wikisController->deleteWiki();
         header("Location: /WikisBrief/app/views/auteur.php");
     }
-
-    if(isset($_GET['modifier'])){
+    if(isset($_POST['modifier'])){
         $wikisController->updateWiki();
         header("Location: /WikisBrief/app/views/auteur.php");
     }
 
+    if (isset($_GET['searchText'])){
+      $search =  $wikisController->search();
+    }
+    
+    
+    if(isset($_GET['id_cat'])){
+        $all = $wikisController->wikisCategorie();
+    }else{
+        $all = $wikisController->affiche3Wikis();
+    }
 
-
-
-
-?>
+    if (isset($_GET['single'])) {
+        $singles = $wikisController->singleWikis();
+    }

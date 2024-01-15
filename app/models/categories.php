@@ -59,7 +59,7 @@ class Categories
         $sql = db::connect()->prepare("DELETE FROM categories where id_categories = :id_categories");
         $sql->bindParam(':id_categories', $id_categorie);
         $sql->execute();
-    }
+    } 
 
     public function selectCategories()
     {
@@ -69,7 +69,7 @@ class Categories
         return $categories;
     }
     public function selectCategoriesByID(){
-        $id_categorie=$this->getIdCategorie();
+        $id_categorie=$this->getIdCategorie(); 
         $sql = db::connect()->prepare("SELECT FROM categories WHERE id_categories = :id_categories ");
         $sql->bindParam(':id_categories', $id_categorie);
         $sql->execute();

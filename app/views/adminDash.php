@@ -94,7 +94,7 @@ require_once '../controllers/adminController.php';
                       <div class="card-body cleartfix">
                         <div class="media align-items-stretch">
                           <div class="align-self-center">
-                            <i class="icon-pencil primary font-large-2 mr-2"></i>
+                            <i class="icon-speech primary font-large-2 mr-2"></i>
                           </div>
                           <div class="media-body">
                             <h4>Wikis</h4>
@@ -117,7 +117,7 @@ require_once '../controllers/adminController.php';
                       <div class="card-body cleartfix">
                         <div class="media align-items-stretch">
                           <div class="align-self-center">
-                            <i class="icon-speech warning font-large-2 mr-2"></i>
+                            <i class="icon-pencil warning font-large-2 mr-2"></i>
                           </div>
                           <div class="media-body">
                             <h4>Auteur</h4>
@@ -140,7 +140,7 @@ require_once '../controllers/adminController.php';
                       <div class="card-body cleartfix">
                         <div class="media align-items-stretch">
                           <div class="align-self-center">
-                            <i class="icon-pencil primary font-large-2 mr-2"></i>
+                            <i class="icon-list success font-large-2 mr-2"></i>
                           </div>
                           <div class="media-body">
                             <h4>Catégories</h4>
@@ -161,7 +161,7 @@ require_once '../controllers/adminController.php';
                       <div class="card-body cleartfix">
                         <div class="media align-items-stretch">
                           <div class="align-self-center">
-                            <i class="icon-speech warning font-large-2 mr-2"></i>
+                            <i class="icon-tag da,ger font-large-2 mr-2"></i>
                           </div>
                           <div class="media-body">
                             <h4>Tags</h4>

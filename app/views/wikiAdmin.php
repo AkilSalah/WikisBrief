@@ -107,15 +107,17 @@ require_once '../controllers/adminController.php';
                                             <tr>
                                                 <th scope="row "><?=$wiki['wiki_titre'] ?></th>
                                                 <td class="w-25">
-                                                    <img src="<?=$wiki['wiki_image'] ?>" class="img-fluid img-thumbnail" alt="image">
+                                                    <img src="<?=$wiki['wiki_image'] ?>" class="img-fluid w-75 img-thumbnail" alt="image">
                                                 </td>
-                                                <td><?=$wiki['wiki_content'] ?></td>
+                                                <td><?= substr($wiki['wiki_content'],0,70)  ?>...</td>
                                                 <td><?= $wiki['nom'] ?> <?= $wiki['prenom'] ?></td> 
                                                 <td>
-                                                <form method="post">
-                                                        <a href="?idArchive=<?=$wiki['id_wiki']?>"><input type="submit" class="btn btn-danger " name="archive" value="Archiver"></a>
-                                                        <a href="?idNoArchive=<?=$wiki['id_wiki']?>"><input type="submit" class="btn btn-success " name="inArchive" value="désarchiver"></a>
-                                                </form>
+                                                <div class="d-flex gap-2">
+                                                  <a href="?idArchive=<?=$wiki['id_wiki']?>"><input type="submit" class="btn btn-danger" name="archive" value="Archiver"></a>
+                                                <a href="?idNoArchive=<?=$wiki['id_wiki']?>"><input type="submit" class="btn btn-success" name="archive" value="Désarchiver"></a>  
+                                                </div>    
+                                                
+                                                
                                             </td>
 
                                             </tr>

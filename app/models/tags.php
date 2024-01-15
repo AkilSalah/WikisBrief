@@ -22,7 +22,7 @@ class TagModel {
 
     public function insertTag(){
         $nom_tag = $this->getNomeTag();
-        $pdo = db::connect();
+        $pdo = db::connect(); 
         $sql = $pdo->prepare("INSERT INTO tags (nom_tag) VALUES (:nom_tag)");
         $sql->bindParam(':nom_tag' ,$nom_tag);
         $sql->execute();

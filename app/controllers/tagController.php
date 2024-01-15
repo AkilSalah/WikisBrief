@@ -17,7 +17,7 @@ class TagController {
             $tag = $_POST['tag'];
             $this->tags->setNomeTag($tag);
             if ($this->tags->insertTag()) {
-                header('location: ../views/tags.php');
+
                 exit();
             }
         }
@@ -53,6 +53,8 @@ $resultt = $tagController->getTags();
 
 if(isset($_POST['submit']) ){
     $tagController->addTag();
+    header("Location: /WikisBrief/app/views/tags.php" );
+
 }
 
 if (isset($_GET['id_d'])) {

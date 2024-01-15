@@ -1,7 +1,8 @@
 <?php
+if (session_status() != 2) {
+    session_start();
+}
 require_once '../models/Admin.php';
-session_start();
-
 class AdminController {
     private $adminModel;
 
@@ -10,9 +11,9 @@ class AdminController {
     }
 
     public function getAdminModel()  {
-        if (isset($_POST['submit']) && !empty($_POST['Email']) && !empty($_POST['Password'])) {
+        if (isset($_POST['admin-login']) && !empty($_POST['Email']) && !empty($_POST['Password'])) {
             $email = filter_input(INPUT_POST, 'Email', FILTER_SANITIZE_EMAIL);
-            $pass = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
+            $pass = filter_input(INPUT_POST, 'Password', FILTER_SANITIZE_SPECIAL_CHARS);
             $this->adminModel->setEmailAdmin($email);
 
             if ($this->adminModel->adminLogin()) {
@@ -20,7 +21,7 @@ class AdminController {
                 header('location: ../views/adminDash.php');
                 exit();
             } else {
-                $errorMessage = "Identifiants incorrects";
+                echo "Identifiants incorrects";
             }
         }
     }
@@ -59,27 +60,27 @@ class AdminController {
 
     public function archiverWiki(){
         if(isset($_GET['idArchive'])){
+
             $idWikiA = $_GET['idArchive'];
+         
             $this->adminModel->archiverWiki($idWikiA);
-
-        }
-    }
-
-    public function deArchiver (){
-        if (isset($_GET['idNoArchive'] )){
+            header("Location: /WikisBrief/app/views/wikiAdmin.php");
+        } elseif (isset($_GET['idNoArchive'])) {
             $idWikid = $_GET['idNoArchive'];
             
             $this->adminModel->desarchiverWiki($idWikid); 
+            header("Location: /WikisBrief/app/views/wikiAdmin.php");
 
         }
     }
+    
 
     
 }
 
 $adminController = new AdminController();
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['admin-login'])) {
     $adminController->getAdminModel();
 }
 
@@ -96,9 +97,5 @@ if(isset($_GET['idArchive'])){
     $adminController->archiverWiki();
     header("Location: /WikisBrief/app/views/wikiAdmin.php");
 }
-if(isset($_GET['idNoArchive'])){
-    $adminController->deArchiver();
-    header("Location: /WikisBrief/app/views/wikiAdmin.php");
-}
 
-?>
+$adminController->archiverWiki();
