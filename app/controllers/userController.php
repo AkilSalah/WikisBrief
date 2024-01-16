@@ -2,6 +2,7 @@
 if (session_status() != 2) {
     session_start();
 }
+
 require_once ('../models/User.php');
 class UserController{
     private $userModel;
@@ -60,9 +61,6 @@ class UserController{
                 echo "User not found!";
                 return null;
             }
-        } else {
-            echo "AuteurEmail not set in session!";
-            return null;
         }
     }
     

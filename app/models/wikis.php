@@ -77,8 +77,6 @@ class Wikis {
         $this->id_tags=$wikiTags;
     }
 
-    
-
     public function insertWiki() {
             $connection = db::connect();
     
@@ -92,11 +90,9 @@ class Wikis {
             $sql->bindParam(':id_user', $this->wiki_auteur);
             $sql->bindParam(':id_categorie', $this->wiki_categorie);
     
-            $result = $sql->execute();
+            $sql->execute();
     
-            if (!$result) {
-                throw new Exception("Erreur lors de l'insertion du wiki.");
-            }
+            
     
             $lastInsertId = $connection->lastInsertId();
     
@@ -110,12 +106,9 @@ class Wikis {
                     $sql = $connection->prepare("INSERT INTO wikis_tags (id_wiki, id_tag) VALUES (:id_wiki, :id_tag)");
                 $sql->bindParam(':id_wiki', $id_wiki);
                 $sql->bindParam(':id_tag', $id_Tag);
-                if (!$sql->execute()) {
-                    throw new Exception("Erreur lors de l'insertion du tag $id_Tag.");
-                }
+                $sql->execute();    
+
             return true;
-    
-       
     }
 
     public function deleteWikis() {
@@ -131,7 +124,7 @@ class Wikis {
             $sql2->bindParam(':id_wiki', $this->id_wiki);
             $sql2->execute();
     
-            echo "Wiki et tags supprimés avec succès.";
+            // echo "Wiki et tags supprimés avec succès.";
     
             return true;
         } 
@@ -191,11 +184,11 @@ class Wikis {
         $nomCategorie = '%' . $this->wiki_categorie . '%';
         $nomTag = '%' . $this->id_tags . '%';
         $nomWiki = '%' . $this->titre_wiki . '%';
-    
+        
         $sql->bindParam(':nom_categorie', $nomCategorie);
         $sql->bindParam(':nom_tag', $nomTag);
         $sql->bindParam(':wiki_titre', $nomWiki);
-    
+        
         $sql->execute();
     
         $search = $sql->fetchAll();

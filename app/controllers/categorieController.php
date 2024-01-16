@@ -28,8 +28,8 @@ class CategoriesController {
         if (isset($_GET['id_d'])) {
             $idCategorieToDelete = $_GET['id_d'];
             $this->categorie->setIdCategorie($idCategorieToDelete);
-            if($this->categorie->deleteCategorie()) {
-        }
+            $this->categorie->deleteCategorie(); 
+        
     }}
 
     public function updateCategorie() {
@@ -46,10 +46,6 @@ class CategoriesController {
                 }
             }
         }
-
-
-
-
     }
 
 $Categories = new CategoriesController();
@@ -72,4 +68,3 @@ if (isset($_GET['id_u'])) {
     $Categories->updateCategorie();
     header("Location: /WikisBrief/app/views/categories.php");
 }
-?>

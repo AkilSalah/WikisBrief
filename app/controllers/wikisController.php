@@ -2,7 +2,6 @@
 if (session_status() != 2) {
     session_start();
 }
-require_once '../models/Admin.php';
 require_once '../models/wikis.php';
 require_once '../models/User.php';
 class WikisController {
@@ -30,7 +29,6 @@ class WikisController {
             move_uploaded_file($image_tmp, $image_path);
             $nom = $_POST['nomW'];
             $selectedTags = $_POST["options"];
-            $jsonTags = json_encode($selectedTags);
             $categories = $_POST['categoriesW'];
             $description = $_POST['descriptionW'];
             $statut = 'noArchived';
@@ -40,7 +38,7 @@ class WikisController {
             $this->wikis->setStatusWiki($statut);
             $this->wikis->setImageWiki( $image_path);
             $this->wikis->setWikiCategorie($categories);
-            $this->wikis->setWikiTags($jsonTags);
+            $this->wikis->setWikiTags($selectedTags);
     
             if (isset($_SESSION['idAuteur'])) {
                 $this->wikis->setWikiAuteur($_SESSION['idAuteur']);
@@ -53,13 +51,7 @@ class WikisController {
                 header('location: ../views/auteur.php');
 
             }
-            // die();
-            // if ($this->wikis->insertWiki()) {
-            //     header('location: ../views/auteur.php');
-            //     exit();
-            // } else {
-            //     echo "Erreur lors de l'insertion du wiki.";
-            // }
+            
         }
     }
 
@@ -108,10 +100,7 @@ class WikisController {
         $treeWiki = $this->wikis->selectLastWikis();
         return $treeWiki;
     }
-    // public function afficheAllWikis(){
-    //     $wikis = $this->wikis->allWikis();
-    //     return $wikis;
-    // }
+    
 
     public function search(){
         if (isset($_GET['searchText'])){
@@ -143,8 +132,6 @@ class WikisController {
     }
 }
     
-
-
 } 
     $wikisController = new WikisController();
 
@@ -153,7 +140,6 @@ class WikisController {
 
     }
     $result = $wikisController->afficheWikisAuteur();
-    // $all = $wikisController->afficheAllWikis();
 
     if(isset($_GET['id_d'])) {
         $wikisController->deleteWiki();

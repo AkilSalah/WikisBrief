@@ -72,9 +72,3 @@ if(isset($_GET['id_u'])){
     header('location: /WikisBrief/app/views/tags.php ');
 
 }
-
-
-
-
-
-?>

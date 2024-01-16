@@ -101,24 +101,6 @@ public function desarchiverWiki($id_wiki){
 }
 
 
-
-
-
-
-
-
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-?>

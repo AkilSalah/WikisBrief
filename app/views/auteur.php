@@ -70,7 +70,7 @@ require_once '../controllers/userController.php';
                     <div class="mb-3">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="col-6">
-                                <h4 class="text-uppercase fw-bold m-1">Management Wikis</h4>
+                                <h4 class="text-uppercase fw-bold m-1">Gestion des Wikis</h4>
                             </div>
                             <div class="">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crudModal">

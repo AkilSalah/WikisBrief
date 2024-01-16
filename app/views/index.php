@@ -2,7 +2,6 @@
 require_once '../controllers/wikisController.php';
 require_once '../controllers/categorieController.php';
 
-
 ?>
 
 <!DOCTYPE html>
@@ -52,8 +51,13 @@ require_once '../controllers/categorieController.php';
                         <a class="nav-link mx-lg-2" href="#">Wikis</a>
                     </li>
                 </ul>
-                
+                <form method="get" class="d-lg-none">
+            <div class="form-outline">
+                <input id="search-input-mobile" type="search" name="search" class="form-control" placeholder="Search" />
+            </div>
+        </form>
                 <a href="login.php" class="login_button d-lg-none">Login</a>
+
             </div>
         </div>
 
@@ -69,11 +73,7 @@ require_once '../controllers/categorieController.php';
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <form method="get" class="d-lg-none">
-            <div class="form-outline">
-                <input id="search-input-mobile" type="search" name="search" class="form-control" placeholder="Search" />
-            </div>
-        </form>
+        
     </div>
 </nav>
 
@@ -88,7 +88,7 @@ require_once '../controllers/categorieController.php';
 
     <section>
         <h1 id="wiki" class="text-center mt-5">Nouveau Wikis </h1>
-        <div class="d-flex flex-row align-items-center justify-content-center gap-3 mt-4">
+        <div class="d-flex flex-row align-items-center flex-wrap justify-content-center gap-3 mt-4">
     <?php foreach ($resultcat as $cat) { ?>
         <a href="index.php?id_cat=<?= $cat['id_categories'] ?>">
         <button type="button" name="filter"  class="btn btn-secondary btn-rounded" data-mdb-ripple-init><?= $cat['nom_categorie'] ?></button></a>
@@ -226,7 +226,7 @@ require_once '../controllers/categorieController.php';
 </footer> 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script>
+  <script>
         document.addEventListener('DOMContentLoaded', function() {
             var searchInput = document.getElementById('search-input');
 
@@ -245,7 +245,7 @@ require_once '../controllers/categorieController.php';
                 xhr.send();
             });
         });
-    </script>
+  </script>
 </body>
 
 </html>

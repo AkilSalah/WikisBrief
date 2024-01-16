@@ -64,3 +64,4 @@ const validatePassword = function(inputElement) {
     );
 };
 
+

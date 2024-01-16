@@ -17,7 +17,7 @@ class AdminController {
             $this->adminModel->setEmailAdmin($email);
 
             if ($this->adminModel->adminLogin()) {
-                $_SESSION['UserEmail'] = $email;
+                $_SESSION['AdminEmail'] = $email;
                 header('location: ../views/adminDash.php');
                 exit();
             } else {
@@ -27,8 +27,8 @@ class AdminController {
     }
 
     public function admin() {
-        if (!empty($_SESSION['UserEmail'])) {
-            $email = $_SESSION['UserEmail'];
+        if (!empty($_SESSION['AdminEmail'])) {
+            $email = $_SESSION['AdminEmail'];
             $this->adminModel->setEmailAdmin($email);
             $result = $this->adminModel->getAdmin();
             return $result;

@@ -53,8 +53,7 @@ require_once '../controllers/adminController.php';
                         <input type="submit" name="admin-login" id="loginSubmit" value="Connexion">
                     </div>
                     <div class="register">
-                        <p>Vous n’avez pas de compte ?  <a href="inscription.php"><span class="text-primary">Inscrivez-vous</span></a></p>
-                        <p>are you not an admin?  <span class="text-primary user-login-form-btn">Login here</span></p>
+                        <p>are you not an admin? <span class="text-primary user-login-form-btn" style="cursor: pointer;" > Login here</span></p>
                     </div>
                 </form>
             </div>

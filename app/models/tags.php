@@ -19,7 +19,7 @@ class TagModel {
     public function setIdTag($id_tag){
         $this->id_tag = $id_tag;
     }
-
+ 
     public function insertTag(){
         $nom_tag = $this->getNomeTag();
         $pdo = db::connect(); 
@@ -52,14 +52,5 @@ class TagModel {
     }
 
 
-
-
-
-
-
 }
 
-
-
-
-?>

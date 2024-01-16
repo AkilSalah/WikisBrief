@@ -16,11 +16,10 @@ class Categories
     }
 
     
-    public function setIdCategorie($id_categorie): self
+    public function setIdCategorie($id_categorie)
     {
         $this->id_categorie = $id_categorie;
 
-        return $this;
     }
 
   
@@ -29,11 +28,10 @@ class Categories
         return $this->nom_categorie;
     }
 
-    public function setNomCategorie($nom_categorie): self
+    public function setNomCategorie($nom_categorie)
     {
         $this->nom_categorie = $nom_categorie;
 
-        return $this;
     }
     public function insertCategorie()
     {
@@ -55,7 +53,7 @@ class Categories
     }
     public function deleteCategorie()
     {
-        $id_categorie = $this->getIdCategorie();
+        $id_categorie = $this->getIdCategorie(); 
         $sql = db::connect()->prepare("DELETE FROM categories where id_categories = :id_categories");
         $sql->bindParam(':id_categories', $id_categorie);
         $sql->execute();
