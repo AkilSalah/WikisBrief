@@ -92,7 +92,7 @@ require_once '../controllers/categorieController.php';
                                 </button>
                             </div>
                         </div>
-
+                        
                         <div class="modal fade" id="crudModal" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-md">
                                 <div class="modal-content">

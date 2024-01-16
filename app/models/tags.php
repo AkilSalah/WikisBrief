@@ -36,7 +36,7 @@ class TagModel {
         $sql->bindParam('id_tag',$id_tag);
         $sql->execute();
     }
-
+ 
     public function deleteTag(){
         $id_tag = $this->getIdTag();
         $sql = db::connect()->prepare("DELETE FROM tags WHERE id_tag = :id_tag ");

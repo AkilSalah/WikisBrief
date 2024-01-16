@@ -87,7 +87,7 @@ public function selectWikis(){
     $wikis=$sql->fetchAll();
     return $wikis;
 }
-
+ 
 public function archiverWiki($id_wiki){
     $sql = db::connect()->prepare("UPDATE wikis set statut = 'archived' where id_wiki = :id_wiki ");
     $sql->bindParam(':id_wiki',$id_wiki );

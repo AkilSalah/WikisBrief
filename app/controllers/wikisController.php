@@ -4,6 +4,7 @@ if (session_status() != 2) {
 }
 require_once '../models/wikis.php';
 require_once '../models/User.php';
+require_once '../models/Admin.php';
 class WikisController {
     private $wikis;
     private $userWikis;
@@ -11,6 +12,7 @@ class WikisController {
     public function __construct(){
         $this->wikis = new Wikis();
         $this->userWikis = new User();
+        
 
     }
 
